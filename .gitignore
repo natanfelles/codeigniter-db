@@ -1,0 +1,11 @@
+*
+!.gitignore
+!README.md
+!cli.png
+!application/
+!application/Commands/
+!application/Commands/Database/
+!application/Commands/Database/*
+!application/Language/
+!application/Language/*/
+!application/Language/*/Database.php
