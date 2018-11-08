@@ -1,0 +1,18 @@
+{
+  "description": "Database Commands for CodeIgniter 4",
+  "name": "natanfelles/codeigniter-db",
+  "type": "codeigniter-command",
+  "homepage": "https://github.com/natanfelles/codeigniter-db",
+  "support": {
+    "source": "https://github.com/natanfelles/codeigniter-db"
+  },
+  "autoload": {
+    "psr-4": {
+      "natanfelles\\CodeIgniter\\DB\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "ext-intl": "*"
+  }
+}
