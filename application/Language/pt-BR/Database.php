@@ -42,6 +42,6 @@ return [
 	'databaseToShow'     => 'O banco de dados a mostrar',
 	'tableToShow'        => 'A tabela a mostrar',
 	'databaseNoTables'   => 'Banco de dados "{0}" não possui tabelas.',
-	'executesQuery'      => 'Executa uma query SQL',
-	'query'              => 'Query',
+	'executesQuery'      => 'Executa uma consulta SQL',
+	'query'              => 'Consulta',
 ];
