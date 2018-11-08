@@ -25,8 +25,8 @@ class Query extends BaseCommand
 	{
 		parent::__construct(...$params);
 
-		$this->description        = lang('Database.executesQuery');
-		$this->arguments['query'] = lang('Database.queryToExecute');
+		$this->description        = lang('DB.executesQuery');
+		$this->arguments['query'] = lang('DB.queryToExecute');
 	}
 
 	public function run(array $params)
@@ -35,11 +35,11 @@ class Query extends BaseCommand
 
 		if (empty($query))
 		{
-			$query = CLI::prompt(lang('Database.query'), null, 'required');
+			$query = CLI::prompt(lang('DB.query'), null, 'required');
 		}
 
 		CLI::write(
-			CLI::color(lang('Database.query') . ': ', 'white')
+			CLI::color(lang('DB.query') . ': ', 'white')
 			. CLI::color($query, 'yellow')
 		);
 
@@ -59,12 +59,12 @@ class Query extends BaseCommand
 
 		if ($db->getLastQuery()->isWriteType())
 		{
-			CLI::write(lang('Database.affectedRows', [$db->affectedRows()]));
+			CLI::write(lang('DB.affectedRows', [$db->affectedRows()]));
 
 			if ($db->insertID())
 			{
 				CLI::write(
-					lang('Database.lastInsertID') . ': ' . CLI::color($db->insertID(), 'green')
+					lang('DB.lastInsertID') . ': ' . CLI::color($db->insertID(), 'green')
 				);
 			}
 
@@ -75,7 +75,7 @@ class Query extends BaseCommand
 
 		if (empty($result))
 		{
-			CLI::write(lang('Database.noResults'));
+			CLI::write(lang('DB.noResults'));
 
 			return;
 		}

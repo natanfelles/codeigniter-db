@@ -25,8 +25,8 @@ class Create extends BaseCommand
 	{
 		parent::__construct(...$params);
 
-		$this->description           = lang('Database.createsDatabase');
-		$this->arguments['database'] = lang('Database.databaseName');
+		$this->description           = lang('DB.createsDatabase');
+		$this->arguments['database'] = lang('DB.databaseName');
 	}
 
 	public function run(array $params)
@@ -35,7 +35,7 @@ class Create extends BaseCommand
 
 		if (empty($database))
 		{
-			$database = CLI::prompt(lang('Database.databaseName'), null, 'regex_match[\w.]');
+			$database = CLI::prompt(lang('DB.databaseName'), null, 'regex_match[\w.]');
 		}
 
 		$show = \Config\Database::connect()
@@ -46,7 +46,7 @@ class Create extends BaseCommand
 		if ($show)
 		{
 			CLI::beep();
-			CLI::error(lang('Database.databaseExists', [$database]));
+			CLI::error(lang('DB.databaseExists', [$database]));
 
 			return;
 		}
@@ -55,11 +55,11 @@ class Create extends BaseCommand
 
 		if ($result)
 		{
-			CLI::write(lang('Database.databaseCreated', [$database]), 'green');
+			CLI::write(lang('DB.databaseCreated', [$database]), 'green');
 
 			return;
 		}
 
-		CLI::error(lang('Database.databaseNotCreated', [$database]));
+		CLI::error(lang('DB.databaseNotCreated', [$database]));
 	}
 }

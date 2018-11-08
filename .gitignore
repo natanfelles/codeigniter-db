@@ -7,4 +7,4 @@
 !src/Commands/*
 !src/Language/
 !src/Language/*/
-!src/Language/*/Database.php
+!src/Language/*/DB.php

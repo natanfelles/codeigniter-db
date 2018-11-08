@@ -25,8 +25,8 @@ class DeleteTable extends BaseCommand
 	{
 		parent::__construct(...$params);
 
-		$this->description        = lang('Database.deletesTable');
-		$this->arguments['table'] = lang('Database.tableName');
+		$this->description        = lang('DB.deletesTable');
+		$this->arguments['table'] = lang('DB.tableName');
 	}
 
 	public function run(array $params)
@@ -35,7 +35,7 @@ class DeleteTable extends BaseCommand
 
 		if (empty($table))
 		{
-			$table = CLI::prompt(lang('Database.tableName'), null, 'regex_match[\w.]');
+			$table = CLI::prompt(lang('DB.tableName'), null, 'regex_match[\w.]');
 		}
 
 		if (strpos($table, '.') !== false)
@@ -53,7 +53,7 @@ class DeleteTable extends BaseCommand
 		if (empty($show))
 		{
 			CLI::beep();
-			CLI::error(lang('Database.tableNotExists', [$table]));
+			CLI::error(lang('DB.tableNotExists', [$table]));
 
 			return;
 		}
@@ -62,11 +62,11 @@ class DeleteTable extends BaseCommand
 
 		if ($result)
 		{
-			CLI::write(lang('Database.tableDeleted', [$table]), 'green');
+			CLI::write(lang('DB.tableDeleted', [$table]), 'green');
 
 			return;
 		}
 
-		CLI::error(lang('Database.tableNotDeleted', [$table]));
+		CLI::error(lang('DB.tableNotDeleted', [$table]));
 	}
 }

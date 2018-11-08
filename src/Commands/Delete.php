@@ -25,8 +25,8 @@ class Delete extends BaseCommand
 	{
 		parent::__construct(...$params);
 
-		$this->description           = lang('Database.deletesDatabase');
-		$this->arguments['database'] = lang('Database.databaseName');
+		$this->description           = lang('DB.deletesDatabase');
+		$this->arguments['database'] = lang('DB.databaseName');
 	}
 
 	public function run(array $params)
@@ -35,7 +35,7 @@ class Delete extends BaseCommand
 
 		if (empty($database))
 		{
-			$database = CLI::prompt(lang('Database.databaseName'), null, 'regex_match[\w.]');
+			$database = CLI::prompt(lang('DB.databaseName'), null, 'regex_match[\w.]');
 		}
 
 		$show = \Config\Database::connect()
@@ -46,7 +46,7 @@ class Delete extends BaseCommand
 		if (empty($show))
 		{
 			CLI::beep();
-			CLI::error(lang('Database.databaseNotExists', [$database]));
+			CLI::error(lang('DB.databaseNotExists', [$database]));
 
 			return;
 		}
@@ -55,11 +55,11 @@ class Delete extends BaseCommand
 
 		if ($result)
 		{
-			CLI::write(lang('Database.databaseDeleted', [$database]), 'green');
+			CLI::write(lang('DB.databaseDeleted', [$database]), 'green');
 
 			return;
 		}
 
-		CLI::error(lang('Database.databaseNotDeleted', [$database]));
+		CLI::error(lang('DB.databaseNotDeleted', [$database]));
 	}
 }

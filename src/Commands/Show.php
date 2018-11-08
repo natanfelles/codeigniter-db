@@ -25,8 +25,8 @@ class Show extends BaseCommand
 	{
 		parent::__construct(...$params);
 
-		$this->description           = lang('Database.showsDatabase');
-		$this->arguments['database'] = lang('Database.databaseName');
+		$this->description           = lang('DB.showsDatabase');
+		$this->arguments['database'] = lang('DB.databaseName');
 	}
 
 	public function run(array $params)
@@ -37,7 +37,7 @@ class Show extends BaseCommand
 		{
 			$db       = config('Database');
 			$default  = $db->{$db->defaultGroup}['database'] ?? null;
-			$database = CLI::prompt(lang('Database.databaseName'), $default, 'regex_match[\w.]');
+			$database = CLI::prompt(lang('DB.databaseName'), $default, 'regex_match[\w.]');
 			CLI::newLine();
 		}
 
@@ -49,7 +49,7 @@ class Show extends BaseCommand
 		if (empty($show))
 		{
 			CLI::beep();
-			CLI::error(lang('Database.databaseNotFound', [$database]));
+			CLI::error(lang('DB.databaseNotFound', [$database]));
 
 			return;
 		}
@@ -59,14 +59,14 @@ class Show extends BaseCommand
 
 		if ($list)
 		{
-			CLI::write(CLI::color(lang('Database.database') . ': ', 'white')
+			CLI::write(CLI::color(lang('DB.database') . ': ', 'white')
 				. CLI::color($database, 'yellow'));
 			CLI::table($list, array_keys($list[0]));
 
 			return;
 		}
 
-		CLI::write(lang('Database.databaseNoTables', [$database]));
+		CLI::write(lang('DB.databaseNoTables', [$database]));
 	}
 
 	public function getTableList(string $database): array
@@ -84,15 +84,15 @@ class Show extends BaseCommand
 		foreach ($tables as $table)
 		{
 			$list[] = [
-				lang('Database.tableName')     => $table['TABLE_NAME'],
-				lang('Database.engine')        => $table['ENGINE'],
-				lang('Database.collation')     => $table['TABLE_COLLATION'],
-				lang('Database.dataLength')    => number_to_size($table['DATA_LENGTH']),
-				lang('Database.indexLength')   => number_to_size($table['INDEX_LENGTH']),
-				lang('Database.dataFree')      => number_to_size($table['DATA_FREE']),
-				lang('Database.autoIncrement') => $table['AUTO_INCREMENT'],
-				lang('Database.rows')          => $table['TABLE_ROWS'],
-				lang('Database.comment')       => $table['TABLE_COMMENT'],
+				lang('DB.tableName')     => $table['TABLE_NAME'],
+				lang('DB.engine')        => $table['ENGINE'],
+				lang('DB.collation')     => $table['TABLE_COLLATION'],
+				lang('DB.dataLength')    => number_to_size($table['DATA_LENGTH']),
+				lang('DB.indexLength')   => number_to_size($table['INDEX_LENGTH']),
+				lang('DB.dataFree')      => number_to_size($table['DATA_FREE']),
+				lang('DB.autoIncrement') => $table['AUTO_INCREMENT'],
+				lang('DB.rows')          => $table['TABLE_ROWS'],
+				lang('DB.comment')       => $table['TABLE_COMMENT'],
 			];
 		}
 

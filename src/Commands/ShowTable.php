@@ -29,8 +29,8 @@ class ShowTable extends BaseCommand
 	{
 		parent::__construct(...$params);
 
-		$this->description        = lang('Database.showsTable');
-		$this->arguments['table'] = lang('Database.tableName');
+		$this->description        = lang('DB.showsTable');
+		$this->arguments['table'] = lang('DB.tableName');
 	}
 
 	public function run(array $params)
@@ -39,7 +39,7 @@ class ShowTable extends BaseCommand
 
 		if (empty($table))
 		{
-			$table = CLI::prompt(lang('Database.tableName'), null, 'regex_match[\w.]');
+			$table = CLI::prompt(lang('DB.tableName'), null, 'regex_match[\w.]');
 			CLI::newLine();
 		}
 
@@ -59,7 +59,7 @@ class ShowTable extends BaseCommand
 		if (empty($show))
 		{
 			CLI::beep();
-			CLI::error(lang('Database.tableNotExists', [$table]));
+			CLI::error(lang('DB.tableNotExists', [$table]));
 
 			return;
 		}
@@ -67,7 +67,7 @@ class ShowTable extends BaseCommand
 		// FIELDS
 		$fields = $this->getFields($table);
 		CLI::write(
-			CLI::color(lang('Database.table') . ': ', 'white')
+			CLI::color(lang('DB.table') . ': ', 'white')
 			. CLI::color($table, 'yellow')
 		);
 		CLI::table($fields, array_keys($fields[0]));
@@ -78,7 +78,7 @@ class ShowTable extends BaseCommand
 
 		if ($indexes)
 		{
-			CLI::write(lang('Database.indexes'), 'white');
+			CLI::write(lang('DB.indexes'), 'white');
 			CLI::table($indexes, array_keys($indexes[0]));
 			CLI::newLine();
 		}
@@ -88,7 +88,7 @@ class ShowTable extends BaseCommand
 
 		if ($foreign_keys)
 		{
-			CLI::write(lang('Database.foreignKeys'), 'white');
+			CLI::write(lang('DB.foreignKeys'), 'white');
 			CLI::table($foreign_keys, array_keys($foreign_keys[0]));
 			CLI::newLine();
 		}
@@ -132,15 +132,15 @@ class ShowTable extends BaseCommand
 			foreach ($columns as $col)
 			{
 				$cols[] = [
-					lang('Database.column')   => $col['field'] . ($col['primary']
+					lang('DB.column')   => $col['field'] . ($col['primary']
 							? ' PRIMARY' : ''),
-					lang('Database.type')     => $col['full_type'] . ($col['collation']
+					lang('DB.type')     => $col['full_type'] . ($col['collation']
 							? ' ' . $col['collation'] : '') . ($col['auto_increment']
-							? ' ' . lang('Database.autoIncrement') : ''),
-					lang('Database.nullable') => $col['null'] ? lang('Database.yes')
-						: lang('Database.no'),
-					lang('Database.default')  => $col['default'],
-					lang('Database.comment')  => $col['comment'],
+							? ' ' . lang('DB.autoIncrement') : ''),
+					lang('DB.nullable') => $col['null'] ? lang('DB.yes')
+						: lang('DB.no'),
+					lang('DB.default')  => $col['default'],
+					lang('DB.comment')  => $col['comment'],
 				];
 			}
 
@@ -162,14 +162,14 @@ class ShowTable extends BaseCommand
 			foreach ($indexes as $index)
 			{
 				$i[] = [
-					lang('Database.name')    => $index['Key_name'],
-					lang('Database.type')    => ($index['Key_name'] === 'PRIMARY'
+					lang('DB.name')    => $index['Key_name'],
+					lang('DB.type')    => ($index['Key_name'] === 'PRIMARY'
 						? 'PRIMARY'
 						: ($index['Index_type'] === 'FULLTEXT'
 							? 'FULLTEXT'
 							: ($index['Non_unique'] ? ($index['Index_type'] === 'SPATIAL'
 								? 'SPATIAL' : 'INDEX') : 'UNIQUE'))),
-					lang('Database.columns') => $index['Column_name'],
+					lang('DB.columns') => $index['Column_name'],
 				];
 			}
 
@@ -217,13 +217,13 @@ class ShowTable extends BaseCommand
 			foreach ($foreign_keys as $fk)
 			{
 				$fks[] = [
-					lang('Database.source') => $fk['source'],
-					lang('Database.target') => (! empty($fk['database'])
+					lang('DB.source') => $fk['source'],
+					lang('DB.target') => (! empty($fk['database'])
 							? $fk['database'] . '.'
 							: '')
 						. $fk['table'] . '(' . $fk['field'] . ')',
-					'ON DELETE'             => $fk['on_delete'],
-					'ON UPDATE'             => $fk['on_update'],
+					'ON DELETE'       => $fk['on_delete'],
+					'ON UPDATE'       => $fk['on_update'],
 				];
 			}
 
