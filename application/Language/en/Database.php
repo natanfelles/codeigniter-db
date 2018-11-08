@@ -44,4 +44,7 @@ return [
 	'databaseNoTables'   => 'Database "{0}" has no tables.',
 	'executesQuery'      => 'Executes a SQL query',
 	'query'              => 'Query',
+	'noResults'          => 'No results.',
+	'affectedRows'       => '{0, plural, =0{No affected row} =1{One affected row} other{# affected rows}}.',
+	'lastInsertID'       => 'Last inserted ID',
 ];

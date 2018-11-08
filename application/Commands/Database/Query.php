@@ -33,36 +33,52 @@ class Query extends BaseCommand
 			$query = CLI::prompt(lang('Database.query'), null, 'required');
 		}
 
-		// TODO: Transaction
+		CLI::write(
+			CLI::color(lang('Database.query') . ': ', 'white')
+			. CLI::color($query, 'yellow')
+		);
+
 		$db = \Config\Database::connect();
 
 		try
 		{
-			$db->transStart();
 			$result = $db->query($query);
-			$db->transCommit();
 		}
 		catch (\Exception $e)
 		{
-			$db->transRollback();
-
 			CLI::beep();
 			CLI::error($e->getMessage());
 			CLI::newLine();
 			exit;
 		}
 
-		// TODO
-		if (\is_bool($result))
+		if ($db->getLastQuery()->isWriteType())
 		{
-			$result ? CLI::write('OK', 'green') : CLI::error('FALSE');
+			CLI::newLine();
+			CLI::write(lang('Database.affectedRows', [$db->affectedRows()]));
+
+			if ($db->insertID())
+			{
+				CLI::write(
+					lang('Database.lastInsertID') . ': ' . CLI::color($db->insertID(), 'green')
+				);
+			}
 		}
 		else
 		{
 			$result = $result->getResultArray();
 
-			CLI::table($result, isset($result[0]) ? array_keys($result[0]) : []);
-			CLI::newLine();
+			if (empty($result))
+			{
+				CLI::newLine();
+				CLI::write(lang('Database.noResults'));
+			}
+			else
+			{
+				CLI::table($result, array_keys($result[0]));
+			}
 		}
+
+		CLI::newLine();
 	}
 }
