@@ -15,6 +15,40 @@ db:show_table   | Shows a database table structure
 
 ![Image of Database Commands for CodeIgniter 4](https://raw.githubusercontent.com/natanfelles/codeigniter-db/master/cli.png)
 
+### Configuration
+
+Map the `natanfelles\CodeIgniter\DB` namespace to the *src* folder of this project.
+
+For example:
+
+Open the *application/Config/Autoload.php* file and...
+
+If the location of the *codeigniter-db* folder is at the same level as the *application* folder, configure the `$psr4` in this way:
+
+```php
+$psr4 = [
+	'Config'      => APPPATH . 'Config',
+	APP_NAMESPACE => APPPATH,
+	'App'         => APPPATH,
+	// codeigniter-db in the root path
+	'natanfelles\CodeIgniter\DB' => ROOTPATH . 'codeigniter-db/src',
+];
+```
+
+If the installation was via Composer, like this:
+
+```php
+$psr4 = [
+	'Config'      => APPPATH . 'Config',
+	APP_NAMESPACE => APPPATH,
+	'App'         => APPPATH,
+	// codeigniter-db installed via Composer
+	'natanfelles\CodeIgniter\DB' => ROOTPATH . 'vendor/natanfelles/codeigniter-db/src',
+];
+```
+
+> Note: Installation via Composer (under development) will be simplified.
+
 ### Contribute
 
 Any contribution related to bugs or improvements of this project will be very well accepted.
