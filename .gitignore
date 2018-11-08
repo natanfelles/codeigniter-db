@@ -1,7 +1,6 @@
 *
 !.gitignore
 !README.md
-!cli.png
 !composer.json
 !src/
 !src/Commands/

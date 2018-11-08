@@ -13,7 +13,7 @@ db:show_table   | Shows a database table structure
 
 ### Preview
 
-![Image of Database Commands for CodeIgniter 4](https://raw.githubusercontent.com/natanfelles/codeigniter-db/master/cli.png)
+![Image of Database Commands for CodeIgniter 4](https://natanfelles.github.io/assets/img_posts/codeigniter-db.png)
 
 ### Configuration
 
