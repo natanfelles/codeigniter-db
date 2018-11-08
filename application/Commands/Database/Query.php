@@ -53,13 +53,12 @@ class Query extends BaseCommand
 		{
 			CLI::beep();
 			CLI::error($e->getMessage());
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		if ($db->getLastQuery()->isWriteType())
 		{
-			CLI::newLine();
 			CLI::write(lang('Database.affectedRows', [$db->affectedRows()]));
 
 			if ($db->insertID())
@@ -68,22 +67,19 @@ class Query extends BaseCommand
 					lang('Database.lastInsertID') . ': ' . CLI::color($db->insertID(), 'green')
 				);
 			}
+
+			return;
 		}
-		else
+
+		$result = $result->getResultArray();
+
+		if (empty($result))
 		{
-			$result = $result->getResultArray();
+			CLI::write(lang('Database.noResults'));
 
-			if (empty($result))
-			{
-				CLI::newLine();
-				CLI::write(lang('Database.noResults'));
-			}
-			else
-			{
-				CLI::table($result, array_keys($result[0]));
-			}
+			return;
 		}
 
-		CLI::newLine();
+		CLI::table($result, array_keys($result[0]));
 	}
 }

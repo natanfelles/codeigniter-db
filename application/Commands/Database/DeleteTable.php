@@ -36,7 +36,6 @@ class DeleteTable extends BaseCommand
 		if (empty($table))
 		{
 			$table = CLI::prompt(lang('Database.tableName'), null, 'regex_match[\w.]');
-			CLI::newLine();
 		}
 
 		if (strpos($table, '.') !== false)
@@ -55,8 +54,8 @@ class DeleteTable extends BaseCommand
 		{
 			CLI::beep();
 			CLI::error(lang('Database.tableNotExists', [$table]));
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		$result = \Config\Database::forge()->dropTable($table);
@@ -64,11 +63,10 @@ class DeleteTable extends BaseCommand
 		if ($result)
 		{
 			CLI::write(lang('Database.tableDeleted', [$table]), 'green');
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		CLI::error(lang('Database.tableNotDeleted', [$table]));
-		CLI::newLine();
 	}
 }

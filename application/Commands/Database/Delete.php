@@ -47,8 +47,8 @@ class Delete extends BaseCommand
 		{
 			CLI::beep();
 			CLI::error(lang('Database.databaseNotExists', [$database]));
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		$result = \Config\Database::forge()->dropDatabase($database);
@@ -56,11 +56,10 @@ class Delete extends BaseCommand
 		if ($result)
 		{
 			CLI::write(lang('Database.databaseDeleted', [$database]), 'green');
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		CLI::error(lang('Database.databaseNotDeleted', [$database]));
-		CLI::newLine();
 	}
 }

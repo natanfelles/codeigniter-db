@@ -47,8 +47,8 @@ class Create extends BaseCommand
 		{
 			CLI::beep();
 			CLI::error(lang('Database.databaseExists', [$database]));
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		$result = \Config\Database::forge()->createDatabase($database);
@@ -56,11 +56,10 @@ class Create extends BaseCommand
 		if ($result)
 		{
 			CLI::write(lang('Database.databaseCreated', [$database]), 'green');
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		CLI::error(lang('Database.databaseNotCreated', [$database]));
-		CLI::newLine();
 	}
 }
