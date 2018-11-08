@@ -16,12 +16,17 @@ class Query extends BaseCommand
 	protected $group       = 'Database';
 	protected $name        = 'db:query';
 	protected $description = 'Executes a SQL query';
+	protected $usage       = 'db:query [query]';
+	protected $arguments   = [
+		'query' => 'The query to execute',
+	];
 
 	public function __construct(...$params)
 	{
 		parent::__construct(...$params);
 
-		$this->description = lang('Database.executesQuery');
+		$this->description        = lang('Database.executesQuery');
+		$this->arguments['query'] = lang('Database.queryToExecute');
 	}
 
 	public function run(array $params)
