@@ -16,12 +16,17 @@ class DeleteTable extends BaseCommand
 	protected $group       = 'Database';
 	protected $name        = 'db:delete_table';
 	protected $description = 'Deletes a Database Table';
+	protected $usage       = 'db:delete_table [table]';
+	protected $arguments   = [
+		'table' => 'Table name',
+	];
 
 	public function __construct(...$params)
 	{
 		parent::__construct(...$params);
 
-		$this->description = lang('Database.deletesTable');
+		$this->description        = lang('Database.deletesTable');
+		$this->arguments['table'] = lang('Database.tableName');
 	}
 
 	public function run(array $params)

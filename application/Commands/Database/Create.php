@@ -16,12 +16,17 @@ class Create extends BaseCommand
 	protected $group       = 'Database';
 	protected $name        = 'db:create';
 	protected $description = 'Creates a Database';
+	protected $usage       = 'db:create [database]';
+	protected $arguments   = [
+		'database' => 'Database name',
+	];
 
 	public function __construct(...$params)
 	{
 		parent::__construct(...$params);
 
-		$this->description = lang('Database.createsDatabase');
+		$this->description           = lang('Database.createsDatabase');
+		$this->arguments['database'] = lang('Database.databaseName');
 	}
 
 	public function run(array $params)

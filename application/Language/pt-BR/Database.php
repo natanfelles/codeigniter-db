@@ -39,8 +39,6 @@ return [
 	'databaseNotDeleted' => 'Banco de dados "{0}" não pode ser excluído.',
 	'showsDatabase'      => 'Mostra informações de bancos de dados',
 	'showsTable'         => 'Mostra a estrutura de uma tabela de banco de dados',
-	'databaseToShow'     => 'O banco de dados a mostrar',
-	'tableToShow'        => 'A tabela a mostrar',
 	'queryToExecute'     => 'A consulta a executar',
 	'databaseNoTables'   => 'Banco de dados "{0}" não possui tabelas.',
 	'executesQuery'      => 'Executa uma consulta SQL',

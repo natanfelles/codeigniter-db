@@ -18,7 +18,7 @@ class ShowTable extends BaseCommand
 	protected $description = 'Shows a Database Table Structure';
 	protected $usage       = 'db:show_table [table]';
 	protected $arguments   = [
-		'table' => 'The table to show',
+		'table' => 'Table name',
 	];
 
 	public function __construct(...$params)
@@ -26,7 +26,7 @@ class ShowTable extends BaseCommand
 		parent::__construct(...$params);
 
 		$this->description        = lang('Database.showsTable');
-		$this->arguments['table'] = lang('Database.tableToShow');
+		$this->arguments['table'] = lang('Database.tableName');
 	}
 
 	public function run(array $params)

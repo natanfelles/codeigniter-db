@@ -18,7 +18,7 @@ class Show extends BaseCommand
 	protected $description = 'Shows Databases Information';
 	protected $usage       = 'db:show [database]';
 	protected $arguments   = [
-		'database' => 'The database to show',
+		'database' => 'Database name',
 	];
 
 	public function __construct(...$params)
@@ -26,7 +26,7 @@ class Show extends BaseCommand
 		parent::__construct(...$params);
 
 		$this->description           = lang('Database.showsDatabase');
-		$this->arguments['database'] = lang('Database.databaseToShow');
+		$this->arguments['database'] = lang('Database.databaseName');
 	}
 
 	public function run(array $params)

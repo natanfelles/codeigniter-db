@@ -16,12 +16,17 @@ class Delete extends BaseCommand
 	protected $group       = 'Database';
 	protected $name        = 'db:delete';
 	protected $description = 'Deletes a Database';
+	protected $usage       = 'db:delete [database]';
+	protected $arguments   = [
+		'database' => 'Database name',
+	];
 
 	public function __construct(...$params)
 	{
 		parent::__construct(...$params);
 
-		$this->description = lang('Database.deletesDatabase');
+		$this->description           = lang('Database.deletesDatabase');
+		$this->arguments['database'] = lang('Database.databaseName');
 	}
 
 	public function run(array $params)
