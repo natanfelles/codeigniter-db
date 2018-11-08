@@ -37,7 +37,7 @@ class Show extends BaseCommand
 		{
 			$db       = new \Config\Database;
 			$default  = $db->{$db->defaultGroup}['database'];
-			$database = CLI::prompt(lang('Database.databaseName'), $default, 'alpha_dash');
+			$database = CLI::prompt(lang('Database.databaseName'), $default, 'regex_match[\w.]');
 			CLI::newLine();
 		}
 

@@ -43,7 +43,7 @@ class ShowTable extends BaseCommand
 		{
 			[$database, $table] = explode('.', $table, 2);
 
-			\Config\Database::connect()->query('USE ' . $database);
+			\Config\Database::connect()->setDatabase($database);
 		}
 
 		$show = \Config\Database::connect()

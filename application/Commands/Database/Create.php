@@ -30,7 +30,7 @@ class Create extends BaseCommand
 
 		if (empty($database))
 		{
-			$database = CLI::prompt(lang('Database.databaseName'), null, 'alpha_dash');
+			$database = CLI::prompt(lang('Database.databaseName'), null, 'regex_match[\w.]');
 		}
 
 		$show = \Config\Database::connect()

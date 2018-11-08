@@ -30,7 +30,15 @@ class DeleteTable extends BaseCommand
 
 		if (empty($table))
 		{
-			$table = CLI::prompt(lang('Database.tableName'), null, 'alpha_dash');
+			$table = CLI::prompt(lang('Database.tableName'), null, 'regex_match[\w.]');
+			CLI::newLine();
+		}
+
+		if (strpos($table, '.') !== false)
+		{
+			[$database, $table] = explode('.', $table, 2);
+
+			\Config\Database::connect()->setDatabase($database);
 		}
 
 		$show = \Config\Database::connect()
