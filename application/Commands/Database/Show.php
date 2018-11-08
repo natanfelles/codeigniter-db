@@ -50,8 +50,8 @@ class Show extends BaseCommand
 		{
 			CLI::beep();
 			CLI::error(lang('Database.databaseNoTables'));
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		// List Tables
@@ -59,7 +59,6 @@ class Show extends BaseCommand
 		CLI::write(CLI::color(lang('Database.database') . ': ', 'white')
 			. CLI::color($database, 'yellow'));
 		CLI::table($list, array_keys($list[0]));
-		CLI::newLine();
 	}
 
 	public function getTableList(string $database): array

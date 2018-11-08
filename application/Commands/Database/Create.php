@@ -43,7 +43,7 @@ class Create extends BaseCommand
 			                        'database' => $database,
 		                        ])->getRowArray();
 
-		if ( ! empty($show))
+		if ($show)
 		{
 			CLI::beep();
 			CLI::error(lang('Database.databaseExists', [$database]));

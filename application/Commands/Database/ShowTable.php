@@ -60,8 +60,8 @@ class ShowTable extends BaseCommand
 		{
 			CLI::beep();
 			CLI::error(lang('Database.tableNotExists', [$table]));
-			CLI::newLine();
-			exit;
+
+			return;
 		}
 
 		// FIELDS
@@ -99,7 +99,7 @@ class ShowTable extends BaseCommand
 		$show = $this->db->query('SHOW FULL COLUMNS FROM ' . $this->db->escapeIdentifiers($table))
 		                 ->getResultArray();
 
-		if ( ! empty($show))
+		if ($show)
 		{
 			$columns = [];
 
@@ -155,7 +155,7 @@ class ShowTable extends BaseCommand
 		$indexes = $this->db->query('SHOW INDEX FROM ' . $this->db->escapeIdentifiers($table))
 		                    ->getResultArray();
 
-		if ( ! empty($indexes))
+		if ($indexes)
 		{
 			$i = [];
 
@@ -184,7 +184,7 @@ class ShowTable extends BaseCommand
 		$show = $this->db->query('SHOW CREATE TABLE ' . $this->db->escapeIdentifiers($table))
 		                 ->getRowArray();
 
-		if ( ! empty($show))
+		if ($show)
 		{
 			$create_table = $show['Create Table'];
 
