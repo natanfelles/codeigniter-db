@@ -35,8 +35,8 @@ class Show extends BaseCommand
 
 		if (empty($database))
 		{
-			$db       = new \Config\Database;
-			$default  = $db->{$db->defaultGroup}['database'];
+			$db       = config('Database');
+			$default  = $db->{$db->defaultGroup}['database'] ?? null;
 			$database = CLI::prompt(lang('Database.databaseName'), $default, 'regex_match[\w.]');
 			CLI::newLine();
 		}
