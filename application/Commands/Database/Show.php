@@ -49,16 +49,24 @@ class Show extends BaseCommand
 		if (empty($show))
 		{
 			CLI::beep();
-			CLI::error(lang('Database.databaseNoTables'));
+			CLI::error(lang('Database.databaseNotFound', [$database]));
 
 			return;
 		}
 
 		// List Tables
 		$list = $this->getTableList($database);
-		CLI::write(CLI::color(lang('Database.database') . ': ', 'white')
-			. CLI::color($database, 'yellow'));
-		CLI::table($list, array_keys($list[0]));
+
+		if ($list)
+		{
+			CLI::write(CLI::color(lang('Database.database') . ': ', 'white')
+				. CLI::color($database, 'yellow'));
+			CLI::table($list, array_keys($list[0]));
+
+			return;
+		}
+
+		CLI::write(lang('Database.databaseNoTables', [$database]));
 	}
 
 	public function getTableList(string $database): array

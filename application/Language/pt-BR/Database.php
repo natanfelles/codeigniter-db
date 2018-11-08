@@ -41,6 +41,7 @@ return [
 	'showsTable'         => 'Mostra a estrutura de uma tabela de banco de dados',
 	'queryToExecute'     => 'A consulta a executar',
 	'databaseNoTables'   => 'Banco de dados "{0}" não possui tabelas.',
+	'databaseNotFound'   => 'Banco de dados "{0}" não foi encontrado.',
 	'executesQuery'      => 'Executa uma consulta SQL',
 	'query'              => 'Consulta',
 	'noResults'          => 'Nenhum resultado.',

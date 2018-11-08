@@ -41,6 +41,7 @@ return [
 	'showsTable'         => 'Shows a database table structure',
 	'queryToExecute'     => 'The query to execute',
 	'databaseNoTables'   => 'Database "{0}" has no tables.',
+	'databaseNotFound'   => 'Database "{0}" was not found.',
 	'executesQuery'      => 'Executes a SQL query',
 	'query'              => 'Query',
 	'noResults'          => 'No results.',
