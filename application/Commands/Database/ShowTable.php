@@ -20,6 +20,10 @@ class ShowTable extends BaseCommand
 	protected $arguments   = [
 		'table' => 'Table name',
 	];
+	/**
+	 * @var \CodeIgniter\Database\BaseConnection
+	 */
+	protected $db;
 
 	public function __construct(...$params)
 	{
@@ -39,17 +43,18 @@ class ShowTable extends BaseCommand
 			CLI::newLine();
 		}
 
+		$this->db = \Config\Database::connect();
+
 		if (strpos($table, '.') !== false)
 		{
 			[$database, $table] = explode('.', $table, 2);
 
-			\Config\Database::connect()->setDatabase($database);
+			$this->db->setDatabase($database);
 		}
 
-		$show = \Config\Database::connect()
-		                        ->query('SHOW TABLES LIKE :table:', [
-			                        'table' => $table,
-		                        ])->getRowArray();
+		$show = $this->db->query('SHOW TABLES LIKE :table:', [
+			'table' => $table,
+		])->getRowArray();
 
 		if (empty($show))
 		{
@@ -89,11 +94,10 @@ class ShowTable extends BaseCommand
 		}
 	}
 
-	public function getFields(string $table): array
+	protected function getFields(string $table): array
 	{
-		$show = \Config\Database::connect()
-		                        ->query('SHOW FULL COLUMNS FROM ' . $table)
-		                        ->getResultArray();
+		$show = $this->db->query('SHOW FULL COLUMNS FROM ' . $this->db->escapeIdentifiers($table))
+		                 ->getResultArray();
 
 		if ( ! empty($show))
 		{
@@ -146,10 +150,10 @@ class ShowTable extends BaseCommand
 		return [];
 	}
 
-	public function getIndexes(string $table): array
+	protected function getIndexes(string $table): array
 	{
-		$indexes = \Config\Database::connect()
-		                           ->query('SHOW INDEX FROM ' . $table)->getResultArray();
+		$indexes = $this->db->query('SHOW INDEX FROM ' . $this->db->escapeIdentifiers($table))
+		                    ->getResultArray();
 
 		if ( ! empty($indexes))
 		{
@@ -175,10 +179,10 @@ class ShowTable extends BaseCommand
 		return [];
 	}
 
-	public function getForeignKeys(string $table): array
+	protected function getForeignKeys(string $table): array
 	{
-		$show = \Config\Database::connect()
-		                        ->query('SHOW CREATE TABLE ' . $table)->getRowArray();
+		$show = $this->db->query('SHOW CREATE TABLE ' . $this->db->escapeIdentifiers($table))
+		                 ->getRowArray();
 
 		if ( ! empty($show))
 		{
