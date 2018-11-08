@@ -1,4 +1,4 @@
-<?php namespace App\Commands\Database;
+<?php namespace natanfelles\CodeIgniter\DB\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;

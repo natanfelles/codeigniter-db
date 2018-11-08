@@ -2,10 +2,9 @@
 !.gitignore
 !README.md
 !cli.png
-!application/
-!application/Commands/
-!application/Commands/Database/
-!application/Commands/Database/*
-!application/Language/
-!application/Language/*/
-!application/Language/*/Database.php
+!src/
+!src/Commands/
+!src/Commands/*
+!src/Language/
+!src/Language/*/
+!src/Language/*/Database.php
