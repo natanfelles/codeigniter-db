@@ -3,6 +3,7 @@
 return [
 	'database'           => 'Database',
 	'table'              => 'Table',
+	'tables'             => 'Tables',
 	'name'               => 'Name',
 	'tableName'          => 'Table Name',
 	'indexes'            => 'Indexes',
@@ -17,6 +18,7 @@ return [
 	'engine'             => 'Engine',
 	'collation'          => 'Collation',
 	'rows'               => 'Rows',
+	'size'               => 'Size',
 	'dataFree'           => 'Data Free',
 	'dataLength'         => 'Data Length',
 	'indexLength'        => 'Index Length',
@@ -30,6 +32,7 @@ return [
 	'createsDatabase'    => 'Creates a database',
 	'deletesDatabase'    => 'Deletes a database',
 	'deletesTable'       => 'Deletes a database table',
+	'listsDatabases'     => 'Lists databases',
 	'databaseName'       => 'Database name',
 	'databaseExists'     => 'Database "{0}" already exists.',
 	'databaseNotExists'  => 'Database "{0}" does not exists.',
@@ -45,6 +48,7 @@ return [
 	'executesQuery'      => 'Executes a SQL query',
 	'query'              => 'Query',
 	'noResults'          => 'No results.',
+	'noDatabases'        => 'No databases.',
 	'affectedRows'       => '{0, plural, =0{No affected row} =1{One affected row} other{# affected rows}}.',
 	'lastInsertID'       => 'Last inserted ID',
 ];

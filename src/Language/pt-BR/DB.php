@@ -3,6 +3,7 @@
 return [
 	'database'           => 'Banco de Dados',
 	'table'              => 'Tabela',
+	'tables'             => 'Tabelas',
 	'name'               => 'Nome',
 	'tableName'          => 'Nome da Tabela',
 	'indexes'            => 'Índices',
@@ -17,6 +18,7 @@ return [
 	'engine'             => 'Motor',
 	'collation'          => 'Colação',
 	'rows'               => 'Linhas',
+	'size'               => 'Tamanho',
 	'dataFree'           => 'Dados Livres',
 	'dataLength'         => 'Tamanho de Dados',
 	'indexLength'        => 'Tamanho do Índice',
@@ -30,6 +32,7 @@ return [
 	'createsDatabase'    => 'Cria um banco de dados',
 	'deletesDatabase'    => 'Exclui um banco de dados',
 	'deletesTable'       => 'Exclui uma tabela do banco de dados',
+	'listsDatabases'     => 'Lista bancos de dados',
 	'databaseName'       => 'Nome do Banco de Dados',
 	'databaseExists'     => 'Banco de dados "{0}" já existe.',
 	'databaseNotExists'  => 'Banco de dados "{0}" não existe.',
@@ -45,6 +48,7 @@ return [
 	'executesQuery'      => 'Executa uma consulta SQL',
 	'query'              => 'Consulta',
 	'noResults'          => 'Nenhum resultado.',
+	'noDatabases'        => 'Nenhum banco de dados.',
 	'affectedRows'       => '{0, plural, =0{Nenhuma linha afetada} =1{Uma linha afetada} other{# linhas afetadas}}.',
 	'lastInsertID'       => 'Último ID inserido',
 ];

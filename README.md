@@ -7,6 +7,7 @@ Adds the following commands to the *Database* group:
 db:create       | Creates a database
 db:delete       | Deletes a database
 db:delete_table | Deletes a database table
+db:list         | Lists databases
 db:query        | Executes a SQL query
 db:show         | Shows databases information
 db:show_table   | Shows a database table structure
