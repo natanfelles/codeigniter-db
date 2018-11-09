@@ -9,7 +9,7 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package App\Commands\Database
+ * @package natanfelles\CodeIgniter\DB\Commands
  */
 class DeleteTable extends BaseCommand
 {
