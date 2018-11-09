@@ -1,18 +1,26 @@
 {
-  "description": "Database Commands for CodeIgniter 4",
   "name": "natanfelles/codeigniter-db",
+  "description": "Database Commands for CodeIgniter 4",
+  "keywords": [
+    "codeigniter",
+    "codeigniter4",
+    "spark",
+    "cli",
+    "command-line",
+    "database",
+    "mysql",
+    "mariadb"
+  ],
   "type": "codeigniter-command",
+  "license": "MIT",
   "homepage": "https://github.com/natanfelles/codeigniter-db",
   "support": {
+    "issues": "https://github.com/natanfelles/codeigniter-db/issues",
     "source": "https://github.com/natanfelles/codeigniter-db"
   },
   "autoload": {
     "psr-4": {
       "natanfelles\\CodeIgniter\\DB\\": "src/"
     }
-  },
-  "require": {
-    "php": ">=7.1",
-    "ext-intl": "*"
   }
 }
