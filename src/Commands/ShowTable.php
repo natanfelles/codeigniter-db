@@ -155,25 +155,59 @@ class ShowTable extends BaseCommand
 		$indexes = $this->db->query('SHOW INDEX FROM ' . $this->db->escapeIdentifiers($table))
 		                    ->getResultArray();
 
+		// TODO: Update method
+		// $indexes = $this->db->getIndexData($table);
+
 		if ($indexes)
 		{
-			$i = [];
+			$keys = [];
+
+			$lang_name    = lang('DB.name');
+			$lang_type    = lang('DB.type');
+			$lang_columns = lang('DB.columns');
 
 			foreach ($indexes as $index)
 			{
-				$i[] = [
-					lang('DB.name')    => $index['Key_name'],
-					lang('DB.type')    => ($index['Key_name'] === 'PRIMARY'
-						? 'PRIMARY'
-						: ($index['Index_type'] === 'FULLTEXT'
-							? 'FULLTEXT'
-							: ($index['Non_unique'] ? ($index['Index_type'] === 'SPATIAL'
-								? 'SPATIAL' : 'INDEX') : 'UNIQUE'))),
-					lang('DB.columns') => $index['Column_name'],
-				];
+				if (empty($keys[$index['Key_name']]))
+				{
+					$keys[$index['Key_name']][$lang_name] = $index['Key_name'];
+
+					if ($index['Key_name'] === 'PRIMARY')
+					{
+						$type = 'PRIMARY';
+					}
+					elseif ($index['Index_type'] === 'FULLTEXT')
+					{
+						$type = 'FULLTEXT';
+					}
+					elseif ($index['Non_unique'])
+					{
+						if ($index['Index_type'] === 'SPATIAL')
+						{
+							$type = 'SPATIAL';
+						}
+						else
+						{
+							$type = 'INDEX';
+						}
+					}
+					else
+					{
+						$type = 'UNIQUE';
+					}
+
+					$keys[$index['Key_name']][$lang_type] = $type;
+				}
+
+				$keys[$index['Key_name']][$lang_columns][] = $index['Column_name'];
 			}
 
-			return $i;
+			foreach ($keys as &$key)
+			{
+				$key[$lang_columns] = implode(', ', $key[$lang_columns]);
+			}
+
+			return array_values($keys);
 		}
 
 		return [];
