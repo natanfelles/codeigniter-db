@@ -62,6 +62,7 @@ class Show extends BaseCommand
 			CLI::write(CLI::color(lang('DB.database') . ': ', 'white')
 				. CLI::color($database, 'yellow'));
 			CLI::table($list, array_keys($list[0]));
+			CLI::write(lang('DB.total') . ': ' . count($list));
 
 			return;
 		}

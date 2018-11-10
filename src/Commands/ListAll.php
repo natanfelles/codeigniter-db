@@ -65,13 +65,13 @@ GROUP BY TABLE_SCHEMA';
 			}
 		}
 
-		$head = [];
+		CLI::table($databases, [
+			lang('DB.database'),
+			lang('DB.collation'),
+			lang('DB.tables'),
+			lang('DB.size'),
+		]);
 
-		foreach (array_keys($databases[0]) as $key)
-		{
-			$head[] = lang('DB.' . $key);
-		}
-
-		CLI::table($databases, $head);
+		CLI::write(lang('DB.total') . ': ' . count($databases));
 	}
 }

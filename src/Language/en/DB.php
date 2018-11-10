@@ -51,4 +51,5 @@ return [
 	'noDatabases'        => 'No databases.',
 	'affectedRows'       => '{0, plural, =0{No affected row} =1{One affected row} other{# affected rows}}.',
 	'lastInsertID'       => 'Last inserted ID',
+	'total'              => 'Total',
 ];
