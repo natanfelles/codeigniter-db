@@ -152,65 +152,26 @@ class ShowTable extends BaseCommand
 
 	protected function getIndexes(string $table): array
 	{
-		$indexes = $this->db->query('SHOW INDEX FROM ' . $this->db->escapeIdentifiers($table))
-		                    ->getResultArray();
-
-		// TODO: Update method
-		// $indexes = $this->db->getIndexData($table);
+		$indexes = $this->db->getIndexData($table);
+		$keys    = [];
 
 		if ($indexes)
 		{
-			$keys = [];
-
 			$lang_name    = lang('DB.name');
 			$lang_type    = lang('DB.type');
 			$lang_columns = lang('DB.columns');
 
 			foreach ($indexes as $index)
 			{
-				if (empty($keys[$index['Key_name']]))
-				{
-					$keys[$index['Key_name']][$lang_name] = $index['Key_name'];
-
-					if ($index['Key_name'] === 'PRIMARY')
-					{
-						$type = 'PRIMARY';
-					}
-					elseif ($index['Index_type'] === 'FULLTEXT')
-					{
-						$type = 'FULLTEXT';
-					}
-					elseif ($index['Non_unique'])
-					{
-						if ($index['Index_type'] === 'SPATIAL')
-						{
-							$type = 'SPATIAL';
-						}
-						else
-						{
-							$type = 'INDEX';
-						}
-					}
-					else
-					{
-						$type = 'UNIQUE';
-					}
-
-					$keys[$index['Key_name']][$lang_type] = $type;
-				}
-
-				$keys[$index['Key_name']][$lang_columns][] = $index['Column_name'];
+				$keys[] = [
+					$lang_name    => $index->name,
+					$lang_type    => $index->type,
+					$lang_columns => implode(', ', $index->fields),
+				];
 			}
-
-			foreach ($keys as &$key)
-			{
-				$key[$lang_columns] = implode(', ', $key[$lang_columns]);
-			}
-
-			return array_values($keys);
 		}
 
-		return [];
+		return $keys;
 	}
 
 	protected function getForeignKeys(string $table): array
