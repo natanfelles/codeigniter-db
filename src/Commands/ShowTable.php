@@ -1,6 +1,5 @@
-<?php namespace natanfelles\CodeIgniter\DB\Commands;
+<?php namespace NatanFelles\CodeIgniter\DB\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
@@ -9,29 +8,16 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package natanfelles\CodeIgniter\DB\Commands
+ * @package NatanFelles\CodeIgniter\DB\Commands
  */
-class ShowTable extends BaseCommand
+class ShowTable extends AbstractCommand
 {
-	protected $group       = 'Database';
 	protected $name        = 'db:show_table';
-	protected $description = 'Shows a Database Table Structure';
+	protected $description = 'DB.showsTable';
 	protected $usage       = 'db:show_table [table]';
 	protected $arguments   = [
-		'table' => 'Table name',
+		'table' => 'DB.tableName',
 	];
-	/**
-	 * @var \CodeIgniter\Database\BaseConnection
-	 */
-	protected $db;
-
-	public function __construct(...$params)
-	{
-		parent::__construct(...$params);
-
-		$this->description        = lang('DB.showsTable');
-		$this->arguments['table'] = lang('DB.tableName');
-	}
 
 	public function run(array $params)
 	{
@@ -42,8 +28,6 @@ class ShowTable extends BaseCommand
 			$table = CLI::prompt(lang('DB.tableName'), null, 'regex_match[\w.]');
 			CLI::newLine();
 		}
-
-		$this->db = \Config\Database::connect();
 
 		if (strpos($table, '.') !== false)
 		{

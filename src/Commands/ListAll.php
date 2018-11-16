@@ -1,6 +1,5 @@
-<?php namespace natanfelles\CodeIgniter\DB\Commands;
+<?php namespace NatanFelles\CodeIgniter\DB\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
@@ -9,20 +8,12 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package natanfelles\CodeIgniter\DB\Commands
+ * @package NatanFelles\CodeIgniter\DB\Commands
  */
-class ListAll extends BaseCommand
+class ListAll extends AbstractCommand
 {
-	protected $group       = 'Database';
 	protected $name        = 'db:list';
-	protected $description = 'Lists Databases';
-
-	public function __construct(...$params)
-	{
-		parent::__construct(...$params);
-
-		$this->description = lang('DB.listsDatabases');
-	}
+	protected $description = 'DB.listsDatabases';
 
 	public function run(array $params)
 	{
@@ -31,7 +22,7 @@ DEFAULT_COLLATION_NAME AS "collation"
 FROM information_schema.SCHEMATA
 ORDER BY SCHEMA_NAME';
 
-		$databases = \Config\Database::connect()->query($sql)->getResultArray();
+		$databases = $this->db->query($sql)->getResultArray();
 
 		if ( ! $databases)
 		{
@@ -46,7 +37,7 @@ COUNT(DISTINCT CONCAT(TABLE_SCHEMA, ".", TABLE_NAME)) AS "tables"
 FROM information_schema.TABLES
 GROUP BY TABLE_SCHEMA';
 
-		$infos = \Config\Database::connect()->query($sql)->getResultArray();
+		$infos = $this->db->query($sql)->getResultArray();
 
 		helper('number');
 

@@ -1,6 +1,5 @@
-<?php namespace natanfelles\CodeIgniter\DB\Commands;
+<?php namespace NatanFelles\CodeIgniter\DB\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
@@ -9,25 +8,16 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package natanfelles\CodeIgniter\DB\Commands
+ * @package NatanFelles\CodeIgniter\DB\Commands
  */
-class DeleteTable extends BaseCommand
+class DeleteTable extends AbstractCommand
 {
-	protected $group       = 'Database';
 	protected $name        = 'db:delete_table';
-	protected $description = 'Deletes a Database Table';
+	protected $description = 'DB.deletesTable';
 	protected $usage       = 'db:delete_table [table]';
 	protected $arguments   = [
-		'table' => 'Table name',
+		'table' => 'DB.tableName',
 	];
-
-	public function __construct(...$params)
-	{
-		parent::__construct(...$params);
-
-		$this->description        = lang('DB.deletesTable');
-		$this->arguments['table'] = lang('DB.tableName');
-	}
 
 	public function run(array $params)
 	{
@@ -42,13 +32,12 @@ class DeleteTable extends BaseCommand
 		{
 			[$database, $table] = explode('.', $table, 2);
 
-			\Config\Database::connect()->setDatabase($database);
+			$this->db->setDatabase($database);
 		}
 
-		$show = \Config\Database::connect()
-		                        ->query('SHOW TABLES LIKE :table:', [
-			                        'table' => $table,
-		                        ])->getRowArray();
+		$show = $this->db->query('SHOW TABLES LIKE :table:', [
+			'table' => $table,
+		])->getRowArray();
 
 		if (empty($show))
 		{
@@ -58,7 +47,7 @@ class DeleteTable extends BaseCommand
 			return;
 		}
 
-		$result = \Config\Database::forge()->dropTable($table);
+		$result = $this->forge->dropTable($table);
 
 		if ($result)
 		{

@@ -18,14 +18,14 @@ db:show_table   | Shows a database table structure
 
 ### Configuration
 
-Map the `natanfelles\CodeIgniter\DB` namespace to the *src* folder of this project.
+Map the `NatanFelles\CodeIgniter\DB` namespace to the *src* folder of this project.
 
 For example:
 
 Open the *application/Config/Autoload.php* file and add a `$psr4` index like this:
 
 ```php
-$psr4['natanfelles\CodeIgniter\DB'] = ROOTPATH . 'codeigniter-db/src';
+$psr4['NatanFelles\CodeIgniter\DB'] = ROOTPATH . 'codeigniter-db/src';
 ```
 
 ### Contribute

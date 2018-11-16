@@ -1,6 +1,5 @@
-<?php namespace natanfelles\CodeIgniter\DB\Commands;
+<?php namespace NatanFelles\CodeIgniter\DB\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
@@ -9,25 +8,16 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package natanfelles\CodeIgniter\DB\Commands
+ * @package NatanFelles\CodeIgniter\DB\Commands
  */
-class Delete extends BaseCommand
+class Delete extends AbstractCommand
 {
-	protected $group       = 'Database';
 	protected $name        = 'db:delete';
-	protected $description = 'Deletes a Database';
+	protected $description = 'DB.deletesDatabase';
 	protected $usage       = 'db:delete [database]';
 	protected $arguments   = [
-		'database' => 'Database name',
+		'database' => 'DB.databaseName',
 	];
-
-	public function __construct(...$params)
-	{
-		parent::__construct(...$params);
-
-		$this->description           = lang('DB.deletesDatabase');
-		$this->arguments['database'] = lang('DB.databaseName');
-	}
 
 	public function run(array $params)
 	{
@@ -38,10 +28,9 @@ class Delete extends BaseCommand
 			$database = CLI::prompt(lang('DB.databaseName'), null, 'regex_match[\w.]');
 		}
 
-		$show = \Config\Database::connect()
-		                        ->query('SHOW DATABASES LIKE :database:', [
-			                        'database' => $database,
-		                        ])->getRowArray();
+		$show = $this->db->query('SHOW DATABASES LIKE :database:', [
+			'database' => $database,
+		])->getRowArray();
 
 		if (empty($show))
 		{
@@ -51,7 +40,7 @@ class Delete extends BaseCommand
 			return;
 		}
 
-		$result = \Config\Database::forge()->dropDatabase($database);
+		$result = $this->forge->dropDatabase($database);
 
 		if ($result)
 		{

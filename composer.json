@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "natanfelles\\CodeIgniter\\DB\\": "src/"
+      "NatanFelles\\CodeIgniter\\DB\\": "src/"
     }
   }
 }

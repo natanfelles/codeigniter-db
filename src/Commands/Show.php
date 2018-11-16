@@ -1,6 +1,5 @@
-<?php namespace natanfelles\CodeIgniter\DB\Commands;
+<?php namespace NatanFelles\CodeIgniter\DB\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
@@ -9,25 +8,16 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package natanfelles\CodeIgniter\DB\Commands
+ * @package NatanFelles\CodeIgniter\DB\Commands
  */
-class Show extends BaseCommand
+class Show extends AbstractCommand
 {
-	protected $group       = 'Database';
 	protected $name        = 'db:show';
-	protected $description = 'Shows Databases Information';
+	protected $description = 'DB.showsDatabase';
 	protected $usage       = 'db:show [database]';
 	protected $arguments   = [
-		'database' => 'Database name',
+		'database' => 'DB.databaseName',
 	];
-
-	public function __construct(...$params)
-	{
-		parent::__construct(...$params);
-
-		$this->description           = lang('DB.showsDatabase');
-		$this->arguments['database'] = lang('DB.databaseName');
-	}
 
 	public function run(array $params)
 	{
@@ -35,16 +25,15 @@ class Show extends BaseCommand
 
 		if (empty($database))
 		{
-			$db       = config('Database');
-			$default  = $db->{$db->defaultGroup}['database'] ?? null;
+			$group    = $this->getDatabaseGroup();
+			$default  = config('Database')->{$group}['database'] ?? null;
 			$database = CLI::prompt(lang('DB.databaseName'), $default, 'regex_match[\w.]');
 			CLI::newLine();
 		}
 
-		$show = \Config\Database::connect()
-		                        ->query('SHOW DATABASES LIKE :database:', [
-			                        'database' => $database,
-		                        ])->getRowArray();
+		$show = $this->db->query('SHOW DATABASES LIKE :database:', [
+			'database' => $database,
+		])->getRowArray();
 
 		if (empty($show))
 		{
@@ -59,8 +48,9 @@ class Show extends BaseCommand
 
 		if ($list)
 		{
-			CLI::write(CLI::color(lang('DB.database') . ': ', 'white')
-				. CLI::color($database, 'yellow'));
+			CLI::write(
+				CLI::color(lang('DB.database') . ': ', 'white') . CLI::color($database, 'yellow')
+			);
 			CLI::table($list, array_keys($list[0]));
 			CLI::write(lang('DB.total') . ': ' . count($list));
 
@@ -74,9 +64,8 @@ class Show extends BaseCommand
 	{
 		$sql = 'SELECT TABLE_NAME, ENGINE, TABLE_COLLATION, DATA_LENGTH, INDEX_LENGTH, DATA_FREE, AUTO_INCREMENT, TABLE_ROWS, TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = :database: ORDER BY TABLE_NAME';
 
-		$tables = \Config\Database::connect()
-		                          ->query($sql, ['database' => $database])
-		                          ->getResultArray();
+		$tables = $this->db->query($sql, ['database' => $database])
+		                   ->getResultArray();
 
 		$list = [];
 

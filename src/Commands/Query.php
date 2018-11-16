@@ -1,6 +1,5 @@
-<?php namespace natanfelles\CodeIgniter\DB\Commands;
+<?php namespace NatanFelles\CodeIgniter\DB\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
@@ -9,25 +8,17 @@ use CodeIgniter\CLI\CLI;
  * @author  Natan Felles https://natanfelles.github.io
  * @link    https://github.com/natanfelles/codeigniter-db
  *
- * @package natanfelles\CodeIgniter\DB\Commands
+ * @package NatanFelles\CodeIgniter\DB\Commands
  */
-class Query extends BaseCommand
+class Query extends AbstractCommand
 {
 	protected $group       = 'Database';
 	protected $name        = 'db:query';
-	protected $description = 'Executes a SQL query';
+	protected $description = 'DB.executesQuery';
 	protected $usage       = 'db:query [query]';
 	protected $arguments   = [
-		'query' => 'The query to execute',
+		'query' => 'DB.queryToExecute',
 	];
-
-	public function __construct(...$params)
-	{
-		parent::__construct(...$params);
-
-		$this->description        = lang('DB.executesQuery');
-		$this->arguments['query'] = lang('DB.queryToExecute');
-	}
 
 	public function run(array $params)
 	{
@@ -39,15 +30,12 @@ class Query extends BaseCommand
 		}
 
 		CLI::write(
-			CLI::color(lang('DB.query') . ': ', 'white')
-			. CLI::color($query, 'yellow')
+			CLI::color(lang('DB.query') . ': ', 'white') . CLI::color($query, 'yellow')
 		);
-
-		$db = \Config\Database::connect();
 
 		try
 		{
-			$result = $db->query($query);
+			$result = $this->db->query($query);
 		}
 		catch (\Exception $e)
 		{
@@ -57,14 +45,14 @@ class Query extends BaseCommand
 			return;
 		}
 
-		if ($db->getLastQuery()->isWriteType())
+		if ($this->db->getLastQuery()->isWriteType())
 		{
-			CLI::write(lang('DB.affectedRows', [$db->affectedRows()]));
+			CLI::write(lang('DB.affectedRows', [$this->db->affectedRows()]));
 
-			if ($db->insertID())
+			if ($this->db->insertID())
 			{
 				CLI::write(
-					lang('DB.lastInsertID') . ': ' . CLI::color($db->insertID(), 'green')
+					lang('DB.lastInsertID') . ': ' . CLI::color($this->db->insertID(), 'green')
 				);
 			}
 
