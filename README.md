@@ -1,3 +1,8 @@
+# Installation
+Installation is best done via Composer. Assuming Composer is installed globally, you may use the following command:
+
+> composer require natanfelles/codeigniter-db
+
 # Database Commands for CodeIgniter 4
 
 Adds the following commands to the *Database* group:
